@@ -29,6 +29,15 @@
         margin-left: 16px;
         font-weight: bold;
       }
+       .slideshow {
+            display: block;
+            width: 100%;
+            text-align: center;
+      }
+        .comment-form {
+            display: none;
+      }
+      
 
     </style>
 </head>
@@ -39,6 +48,7 @@
     <div class="container">
     <a href="">Kommentare</a>
     </div></div>
+  
     <h1>
     Kochrezepten von<br>Kariküche
     </h1>
@@ -121,6 +131,49 @@ Viel Spaß beim Nachkochen 🍽🔪.
 </P>
 
 <img src="pepesoup.jpg">
+
+<div class="slideshow">
+  <img id="image" src="first.jpg" alt="Slideshow Image">
+</div>
+<a href="#" onclick="toggleCommentForm()">Kommentar schreiben</a>
+
+<form class="comment-form">
+  <textarea rows="4" cols="50"></textarea><br>
+  <input type="submit" value="Kommentar abschicken">
+</form>
+<textarea id="comment" rows="4" cols="50" maxlength="500" oninput="updateCharacterCount()"></textarea>
+<div id="characterCount">Verbleibende Zeichen: 500</div>
+
+<script>
+  const images = ["first.jpg", "second.jpg", "third.jpg"];
+  let index = 0;
+
+  function changeImage() {
+    document.getElementById("image").src = images[index];
+    index = (index + 1) % images.length;
+  }
+
+  setInterval(changeImage, 2000); // Change image every 2 seconds
+
+   function toggleCommentForm() {
+      const form = document.querySelector('.comment-form');
+      if (form.style.display === 'none') {
+        form.style.display = 'block';
+      } else {
+        form.style.display = 'none';
+      }
+    }
+
+     function updateCharacterCount() {
+        const textarea = document.getElementById('comment');
+        const count = document.getElementById('characterCount');
+        const remaining = 500 - textarea.value.length;
+        count.textContent = `Verbleibende Zeichen: ${remaining}`;
+      }
+
+</script>
+
+
 
 </body>
 </html>
